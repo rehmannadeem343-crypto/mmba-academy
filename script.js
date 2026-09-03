@@ -7,7 +7,7 @@ if (ownerPhone) {
   ownerPhone.textContent = '+92 322 3834771';
 }
 
-document.querySelectorAll('a[href="mailto:hello@mmba.edu.pk"]').forEach((emailLink) => {
+document.querySelectorAll('.contact-details a[href="mailto:hello@mmba.edu.pk"]').forEach((emailLink) => {
   emailLink.href = 'mailto:mmba841@gmail.com';
   emailLink.textContent = 'mmba841@gmail.com';
 });
