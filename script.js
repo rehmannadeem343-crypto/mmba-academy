@@ -31,15 +31,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
 document.querySelectorAll('.archive-grid a').forEach((link) => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-    const resourceName = link.textContent.replace('PDF ↗', '').trim();
-    const year = link.closest('article').querySelector('.folder').textContent.trim().split(' ')[0];
-    const file = new Blob([`MMBA Academy\n${year} ${resourceName}\n\nOfficial paper resource placeholder. Replace this file with the board PDF when published.`], { type: 'text/plain' });
-    const download = document.createElement('a');
-    download.href = URL.createObjectURL(file);
-    download.download = `MMBA-${year}-${resourceName.replaceAll(' ', '-')}.txt`;
-    download.click();
-    URL.revokeObjectURL(download.href);
-  });
+  link.href = 'https://mail.fbise.edu.pk/Old%20Question%20Paper.php';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
 });
