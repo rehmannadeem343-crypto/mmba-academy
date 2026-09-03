@@ -8,8 +8,8 @@ if (ownerPhone) {
 }
 
 document.querySelectorAll('a[href="mailto:hello@mmba.edu.pk"]').forEach((emailLink) => {
-  emailLink.href = 'mailto:hello@mmba.edu.pk';
-  emailLink.textContent = 'hello@mmba.edu.pk';
+  emailLink.href = 'mailto:mmba841@gmail.com';
+  emailLink.textContent = 'mmba841@gmail.com';
 });
 
 if (menuToggle && navigation) {
