@@ -1,6 +1,44 @@
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const navigation = document.querySelector('[data-nav]');
 
+const admissionsWebhook = 'https://hook.eu1.make.com/n4su8h7eple12yrdqjyfdev1ae2jkd14';
+
+const contactCard = document.querySelector('.contact-card');
+if (contactCard) {
+  const admissionsForm = document.createElement('form');
+  admissionsForm.className = 'admissions-form';
+  admissionsForm.innerHTML = `
+    <label>Name<input name="name" type="text" placeholder="Your name" required></label>
+    <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
+    <label>Phone<input name="phone" type="tel" placeholder="+92 ..." required></label>
+    <label>Class<select name="class" required><option value="">Select class</option><option>SSC Part I / 9th</option><option>SSC Part II / 10th</option><option>FA / FSc Part I</option><option>FA / FSc Part II</option></select></label>
+    <label>Message<textarea name="message" rows="3" placeholder="How can we help?" required></textarea></label>
+    <button class="button button-red" type="submit">Send enquiry <span>↗</span></button>
+    <p class="form-status" role="status" aria-live="polite"></p>`;
+  contactCard.appendChild(admissionsForm);
+  admissionsForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submitButton = admissionsForm.querySelector('button[type="submit"]');
+    const status = admissionsForm.querySelector('.form-status');
+    submitButton.disabled = true;
+    status.textContent = 'Sending enquiry...';
+    try {
+      const response = await fetch(admissionsWebhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source: 'MMBA Academy website', enquiryType: 'Admissions', submittedAt: new Date().toISOString(), ...Object.fromEntries(new FormData(admissionsForm)) })
+      });
+      if (!response.ok) throw new Error('Request failed');
+      admissionsForm.reset();
+      status.textContent = 'Thank you. We will contact you soon.';
+    } catch {
+      status.textContent = 'Unable to send right now. Please email us directly.';
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}
+
 const botpressInject = document.createElement('script');
 botpressInject.src = 'https://cdn.botpress.cloud/webchat/v3.7/inject.js';
 document.head.appendChild(botpressInject);
