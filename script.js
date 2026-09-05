@@ -6,6 +6,7 @@ const admissionsWebhook = 'https://hook.eu1.make.com/n4su8h7eple12yrdqjyfdev1ae2
 const contactCard = document.querySelector('.contact-card');
 if (contactCard) {
   const admissionsForm = document.createElement('form');
+  admissionsForm.id = 'admissions-form';
   admissionsForm.className = 'admissions-form';
   admissionsForm.innerHTML = `
     <label>Name<input name="name" type="text" placeholder="Your name" required></label>
@@ -23,11 +24,11 @@ if (contactCard) {
     submitButton.disabled = true;
     status.textContent = 'Sending enquiry...';
     try {
-      const response = await fetch(admissionsWebhook, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source: 'MMBA Academy website', enquiryType: 'Admissions', submittedAt: new Date().toISOString(), ...Object.fromEntries(new FormData(admissionsForm)) })
-      });
+      const formData = new FormData(admissionsForm);
+      formData.append('source', 'MMBA Academy website');
+      formData.append('enquiryType', 'Admissions');
+      formData.append('submittedAt', new Date().toISOString());
+      const response = await fetch(admissionsWebhook, { method: 'POST', body: formData });
       if (!response.ok) throw new Error('Request failed');
       admissionsForm.reset();
       status.textContent = 'Thank you. We will contact you soon.';
