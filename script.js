@@ -9,18 +9,24 @@ const botpressConfig = document.createElement('script');
 botpressConfig.src = 'https://files.bpcontent.cloud/2026/07/26/10/20260726100403-QO3OBXAF.js';
 const applyBotpressTheme = () => {
   const botRoot = document.querySelector('#fab-root');
-  if (!botRoot?.shadowRoot || botRoot.shadowRoot.querySelector('#mmba-botpress-theme')) return;
+  if (!botRoot?.shadowRoot || botRoot.shadowRoot.querySelector('#mmba-botpress-theme')) return false;
   const theme = document.createElement('style');
   theme.id = 'mmba-botpress-theme';
   theme.textContent = `.bpReset { --bpPrimary-1: #ffffff !important; --bpPrimary-50: #f4f4f4 !important; --bpPrimary-100: #e8e8e8 !important; --bpPrimary-200: #d2d2d2 !important; --bpPrimary-500: #111111 !important; --bpPrimary-600: #000000 !important; --bpPrimary-700: #000000 !important; --bpPrimary-800: #111111 !important; } .bpReset button { border-radius: 0 !important; }`;
   botRoot.shadowRoot.appendChild(theme);
+  return true;
 };
 
 botpressInject.addEventListener('load', () => {
   document.head.appendChild(botpressConfig);
   const themeObserver = new MutationObserver(applyBotpressTheme);
   themeObserver.observe(document.body, { childList: true, subtree: true });
-  applyBotpressTheme();
+  let attempts = 0;
+  const themeTimer = window.setInterval(() => {
+    const applied = applyBotpressTheme();
+    attempts += 1;
+    if (applied || attempts > 40) window.clearInterval(themeTimer);
+  }, 250);
 });
 
 const ownerPhone = document.querySelector('a[href="tel:+92510000000"]');
