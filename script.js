@@ -14,29 +14,10 @@ const applyBotpressTheme = () => {
   headings.forEach((heading) => {
     if (heading.textContent.trim() === 'Bot') heading.textContent = 'MMBA Academy';
   });
-  botRoot.shadowRoot.querySelectorAll('.bpHeaderContainer, .bpHeaderContentContainer').forEach((element) => {
-    element.style.setProperty('background', '#171717', 'important');
-    element.style.setProperty('background-color', '#171717', 'important');
-    element.style.setProperty('background-image', 'none', 'important');
-    element.style.setProperty('color', '#ffffff', 'important');
-  });
-  botRoot.shadowRoot.querySelectorAll('.bpHeaderContainer button, .bpHeaderContentContainer button').forEach((element) => {
-    element.style.setProperty('background', '#171717', 'important');
-    element.style.setProperty('background-color', '#171717', 'important');
-    element.style.setProperty('color', '#ffffff', 'important');
-  });
-  botRoot.shadowRoot.querySelectorAll('.bpFabContainer, .bpFabIcon').forEach((element) => {
-    element.style.setProperty('background-color', '#171717', 'important');
-    element.style.setProperty('color', '#ffffff', 'important');
-  });
-  botRoot.shadowRoot.querySelectorAll('.bpContainer, .bpComposerContainer').forEach((element) => {
-    element.style.setProperty('background-color', '#f5f5f5', 'important');
-    element.style.setProperty('color', '#171717', 'important');
-  });
   if (botRoot.shadowRoot.querySelector('#mmba-botpress-theme')) return !headings.some((heading) => heading.textContent.trim() === 'Bot');
   const theme = document.createElement('style');
   theme.id = 'mmba-botpress-theme';
-  theme.textContent = `.bpReset { --bpPrimary-1: #ffffff !important; --bpPrimary-50: #f5f5f5 !important; --bpPrimary-100: #e5e5e5 !important; --bpPrimary-200: #cfcfcf !important; --bpPrimary-500: #222222 !important; --bpPrimary-600: #171717 !important; --bpPrimary-700: #333333 !important; --bpPrimary-800: #111111 !important; --bpGray-50: #f5f5f5 !important; --bpGray-100: #e8e8e8 !important; font-family: 'Manrope', Arial, sans-serif !important; } .bpReset button { background: #222222 !important; color: #ffffff !important; border: 1px solid #222222 !important; border-radius: 0 !important; font-family: inherit !important; } .bpReset input, .bpReset textarea { background: #ffffff !important; color: #171717 !important; border: 1px solid #a8a8a8 !important; border-radius: 0 !important; font-family: inherit !important; } .bpReset .bpFab, .bpReset .bpFabContainer, .bpReset .bpFabIcon { background: #171717 !important; color: #ffffff !important; border: 1px solid #555555 !important; box-shadow: 0 10px 24px rgba(0,0,0,.28) !important; } .bpReset .bpWebchat, .bpReset [class*='Webchat'], .bpReset [class*='webchat'] { background: #f5f5f5 !important; color: #171717 !important; border: 1px solid #8f8f8f !important; box-shadow: 0 20px 45px rgba(0,0,0,.22) !important; } .bpReset.bpHeaderContainer, .bpReset.bpHeaderContentContainer, .bpHeaderContainer, .bpHeaderContentContainer { background: #171717 !important; color: #ffffff !important; border-bottom: 1px solid #3f3f3f !important; } .bpReset .bpMessageBlocksBubble, .bpMessageBlocksBubble { background: #e8e8e8 !important; color: #171717 !important; } .bpReset [class*='Message'], .bpReset [class*='message'] { color: #171717 !important; }`;
+  theme.textContent = `.bpReset { --bpPrimary-1: #ffffff !important; --bpPrimary-50: #ffffff !important; --bpPrimary-100: #f4f4f4 !important; --bpPrimary-200: #e6e6e6 !important; --bpPrimary-500: #d9362b !important; --bpPrimary-600: #c52e25 !important; --bpPrimary-700: #a9251e !important; --bpPrimary-800: #111111 !important; --bpGray-50: #ffffff !important; --bpGray-100: #f2f2f2 !important; --bpGray-200: #dedede !important; font-family: 'Manrope', Arial, sans-serif !important; } .bpReset button { background: #d9362b !important; color: #ffffff !important; border: 1px solid #d9362b !important; border-radius: 2px !important; font-family: inherit !important; } .bpReset input, .bpReset textarea { background: #ffffff !important; color: #111111 !important; border: 1px solid #bdbdbd !important; border-radius: 2px !important; font-family: inherit !important; } .bpReset .bpFab, .bpReset .bpFabContainer, .bpReset .bpFabIcon { background: #111111 !important; color: #ffffff !important; border: 1px solid #111111 !important; box-shadow: 0 10px 24px rgba(0,0,0,.24) !important; } .bpReset .bpWebchat, .bpReset [class*='Webchat'], .bpReset [class*='webchat'] { background: #f2f2f2 !important; color: #111111 !important; border: 1px solid #bdbdbd !important; box-shadow: 0 20px 45px rgba(0,0,0,.2) !important; } .bpReset [class*='Header'], .bpReset [class*='header'] { background: #111111 !important; color: #ffffff !important; border-bottom: 2px solid #d9362b !important; } .bpReset [class*='Message'], .bpReset [class*='message'] { color: #111111 !important; } .bpReset [class*='UserMessage'], .bpReset [class*='userMessage'] { background: #d9362b !important; color: #ffffff !important; }`;
   botRoot.shadowRoot.appendChild(theme);
   return true;
 };
