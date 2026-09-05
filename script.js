@@ -9,10 +9,15 @@ const botpressConfig = document.createElement('script');
 botpressConfig.src = 'https://files.bpcontent.cloud/2026/07/26/10/20260726100403-QO3OBXAF.js';
 const applyBotpressTheme = () => {
   const botRoot = document.querySelector('#fab-root');
-  if (!botRoot?.shadowRoot || botRoot.shadowRoot.querySelector('#mmba-botpress-theme')) return false;
+  if (!botRoot?.shadowRoot) return false;
+  const headings = [...botRoot.shadowRoot.querySelectorAll('h1, h2')];
+  headings.forEach((heading) => {
+    if (heading.textContent.trim() === 'Bot') heading.textContent = 'MMBA Academy';
+  });
+  if (botRoot.shadowRoot.querySelector('#mmba-botpress-theme')) return headings.length > 0;
   const theme = document.createElement('style');
   theme.id = 'mmba-botpress-theme';
-  theme.textContent = `.bpReset { --bpPrimary-1: #ffffff !important; --bpPrimary-50: #f4f4f4 !important; --bpPrimary-100: #e8e8e8 !important; --bpPrimary-200: #d2d2d2 !important; --bpPrimary-500: #111111 !important; --bpPrimary-600: #000000 !important; --bpPrimary-700: #000000 !important; --bpPrimary-800: #111111 !important; } .bpReset button { border-radius: 0 !important; }`;
+  theme.textContent = `.bpReset { --bpPrimary-1: #ffffff !important; --bpPrimary-50: #f4f4f4 !important; --bpPrimary-100: #e8e8e8 !important; --bpPrimary-200: #d2d2d2 !important; --bpPrimary-500: #111111 !important; --bpPrimary-600: #000000 !important; --bpPrimary-700: #000000 !important; --bpPrimary-800: #111111 !important; --bpGray-50: #fafafa !important; --bpGray-100: #f1f1f1 !important; font-family: 'Manrope', Arial, sans-serif !important; } .bpReset button { border-radius: 0 !important; font-family: inherit !important; } .bpReset input, .bpReset textarea { border-radius: 0 !important; font-family: inherit !important; } .bpReset .bpFab { background: #111111 !important; border: 1px solid #ffffff !important; box-shadow: 0 10px 24px rgba(0,0,0,.24) !important; } .bpReset .bpFabContainer { border-radius: 0 !important; } .bpReset .bpWebchat { border: 1px solid #252525 !important; box-shadow: 0 20px 45px rgba(0,0,0,.22) !important; }`;
   botRoot.shadowRoot.appendChild(theme);
   return true;
 };
