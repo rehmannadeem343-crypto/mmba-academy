@@ -28,8 +28,7 @@ if (contactCard) {
       formData.append('source', 'MMBA Academy website');
       formData.append('enquiryType', 'Admissions');
       formData.append('submittedAt', new Date().toISOString());
-      const response = await fetch(admissionsWebhook, { method: 'POST', body: formData });
-      if (!response.ok) throw new Error('Request failed');
+      await fetch(admissionsWebhook, { method: 'POST', mode: 'no-cors', body: formData });
       admissionsForm.reset();
       status.textContent = 'Thank you. We will contact you soon.';
     } catch {
