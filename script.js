@@ -14,6 +14,18 @@ const applyBotpressTheme = () => {
   headings.forEach((heading) => {
     if (heading.textContent.trim() === 'Bot') heading.textContent = 'MMBA Academy';
   });
+  botRoot.shadowRoot.querySelectorAll('.bpHeaderContainer, .bpHeaderContentContainer').forEach((element) => {
+    element.style.setProperty('background-color', '#171717', 'important');
+    element.style.setProperty('color', '#ffffff', 'important');
+  });
+  botRoot.shadowRoot.querySelectorAll('.bpFabContainer, .bpFabIcon').forEach((element) => {
+    element.style.setProperty('background-color', '#171717', 'important');
+    element.style.setProperty('color', '#ffffff', 'important');
+  });
+  botRoot.shadowRoot.querySelectorAll('.bpContainer, .bpComposerContainer').forEach((element) => {
+    element.style.setProperty('background-color', '#f5f5f5', 'important');
+    element.style.setProperty('color', '#171717', 'important');
+  });
   if (botRoot.shadowRoot.querySelector('#mmba-botpress-theme')) return !headings.some((heading) => heading.textContent.trim() === 'Bot');
   const theme = document.createElement('style');
   theme.id = 'mmba-botpress-theme';
