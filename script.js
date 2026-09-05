@@ -15,6 +15,13 @@ const applyBotpressTheme = () => {
     if (heading.textContent.trim() === 'Bot') heading.textContent = 'MMBA Academy';
   });
   botRoot.shadowRoot.querySelectorAll('.bpHeaderContainer, .bpHeaderContentContainer').forEach((element) => {
+    element.style.setProperty('background', '#171717', 'important');
+    element.style.setProperty('background-color', '#171717', 'important');
+    element.style.setProperty('background-image', 'none', 'important');
+    element.style.setProperty('color', '#ffffff', 'important');
+  });
+  botRoot.shadowRoot.querySelectorAll('.bpHeaderContainer button, .bpHeaderContentContainer button').forEach((element) => {
+    element.style.setProperty('background', '#171717', 'important');
     element.style.setProperty('background-color', '#171717', 'important');
     element.style.setProperty('color', '#ffffff', 'important');
   });
