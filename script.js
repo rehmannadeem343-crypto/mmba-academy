@@ -83,6 +83,10 @@ document.querySelectorAll('.contact-details a[href="mailto:hello@mmba.edu.pk"]')
   emailLink.textContent = 'mmba841@gmail.com';
 });
 
+document.querySelectorAll('.contact-card a[href="mailto:hello@mmba.edu.pk"], .site-footer a[href="mailto:hello@mmba.edu.pk"]').forEach((emailLink) => {
+  emailLink.href = 'mailto:mmba841@gmail.com';
+});
+
 if (menuToggle && navigation) {
   menuToggle.addEventListener('click', () => {
     const isOpen = navigation.classList.toggle('open');
