@@ -5,47 +5,14 @@ const admissionsWebhook = 'https://hook.eu1.make.com/n4su8h7eple12yrdqjyfdev1ae2
 
 const contactCard = document.querySelector('.contact-card');
 if (contactCard) {
-  const admissionsForm = document.createElement('form');
-  admissionsForm.id = 'admissions-form';
-  admissionsForm.className = 'admissions-form';
-  admissionsForm.action = admissionsWebhook;
-  admissionsForm.method = 'post';
-  admissionsForm.innerHTML = `
-    <label>Student full name<input name="studentName" type="text" placeholder="Student's full name" autocomplete="name" required></label>
-    <label>Father / guardian name<input name="guardianName" type="text" placeholder="Father or guardian name" required></label>
-    <label>Class for admission<select name="classLevel" required><option value="">Select class</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></label>
-    <label>Board<select name="board" required><option value="">Select board</option><option>Federal Board</option><option>Punjab Board</option><option>Other</option></select></label>
-    <label>Subject group<select name="subjectGroup"><option value="">Select subject group</option><option>Pre-Medical</option><option>Pre-Engineering</option><option>Commerce</option><option>Arts / General</option></select></label>
-    <label>Previous school name<input name="previousSchool" type="text" placeholder="School name"></label>
-    <label>Previous class percentage / grade<input name="previousGrade" type="text" placeholder="For example: 82% or A grade"></label>
-    <label>Phone / WhatsApp number<input name="phone" type="tel" placeholder="+92 322 3834771" pattern="\\+?[0-9\\s\\-]{10,17}" autocomplete="tel" required></label>
-    <label>Email address<input name="email" type="email" placeholder="you@example.com" autocomplete="email" required></label>
-    <label>City / area<input name="cityArea" type="text" placeholder="Rawalpindi, Pakistan"></label>
-    <label>Preferred batch timing<select name="batchTiming"><option value="">Select timing</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
-    <label>Additional message / questions<textarea name="message" rows="3" placeholder="Anything else you would like us to know?"></textarea></label>
-    <button class="button button-red" type="submit">Submit application <span>↗</span></button>
-    <p class="form-status" role="status" aria-live="polite"></p>`;
-  contactCard.appendChild(admissionsForm);
-  admissionsForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const submitButton = admissionsForm.querySelector('button[type="submit"]');
-    const status = admissionsForm.querySelector('.form-status');
-    submitButton.disabled = true;
-    status.textContent = 'Sending enquiry...';
-    try {
-      const formData = new FormData(admissionsForm);
-      formData.append('source', 'MMBA Academy website');
-      formData.append('enquiryType', 'Admissions');
-      formData.append('submittedAt', new Date().toISOString());
-      await fetch(admissionsWebhook, { method: 'POST', mode: 'no-cors', body: formData });
-      admissionsForm.reset();
-      status.textContent = 'Application received. We will contact you soon.';
-    } catch {
-      status.textContent = 'Unable to send right now. Please email us directly.';
-    } finally {
-      submitButton.disabled = false;
-    }
-  });
+  const tallyFrame = document.createElement('iframe');
+  tallyFrame.className = 'tally-admission-form';
+  tallyFrame.src = 'https://tally.so/r/PdxO2b?transparentBackground=1';
+  tallyFrame.title = 'MMBA Academy admission form';
+  tallyFrame.loading = 'lazy';
+  tallyFrame.frameBorder = '0';
+  tallyFrame.allow = 'fullscreen';
+  contactCard.appendChild(tallyFrame);
 }
 
 const botpressInject = document.createElement('script');
